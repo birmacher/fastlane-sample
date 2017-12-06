@@ -34,7 +34,12 @@ platform :ios do
     gym(
       scheme: "fastlane_sample",
       output_directory: ENV['BITRISE_DEPLOY_DIR'],
-      export_method: "development"
+      export_method: "development",
+      export_options: {
+        provisioningProfiles: {
+          "com.bitrise.fastlane.fastlane-sample" => "Bitrise development - (com.bitrise.fastlane.fastlane-sample)"
+        }
+      }
     )
 
     # sh "your_script.sh"
