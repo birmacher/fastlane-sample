@@ -15,8 +15,6 @@ fastlane_version "1.111.0"
 
 default_platform :ios
 
-output_directory ENV['BITRISE_DEPLOY_DIR']
-
 platform :ios do
   before_all do
     # ENV["SLACK_URL"] = "https://hooks.slack.com/services/..."
@@ -33,7 +31,10 @@ platform :ios do
   desc "This will also make sure the profile is up to date"
   lane :beta do
     # match(type: "appstore") # more information: https://codesigning.guide
-    gym(scheme: "fastlane_sample") # Build your app - more options available
+    gym(
+      scheme: "fastlane_sample",
+      output_directory: ENV['BITRISE_DEPLOY_DIR']
+    )
 
     # sh "your_script.sh"
     # You can also use other beta testing services here (run `fastlane actions`)
